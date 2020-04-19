@@ -2,6 +2,7 @@
 -r requirements.txt
 
 # Install test dependencies
+pylint
 black
 flake8
 pytest
