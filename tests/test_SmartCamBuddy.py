@@ -2,7 +2,6 @@ import sys
 import pytest
 from smarcambuddy import smartcambuddy
 
-
 def test_trigger_function_triggers_a_photo():
     photoPath = smartcambuddy.trigger()
     # assert photoPath exists
