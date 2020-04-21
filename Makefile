@@ -2,7 +2,7 @@ init:
 	pip install -r requirements_dev.txt
 
 test:
-	pytest
+	python -m pytest tests/
 
 lint:
 	pylint **/*.py
