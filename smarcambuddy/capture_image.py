@@ -12,8 +12,10 @@ import gphoto2 as gp
 class CaptureImage:
     """This class does ... """
 
-    def trigger(self):
-        """This function does ... """
+    @staticmethod
+    def trigger():
+        """This function captures an image ... """
+
         logging.basicConfig(format='%(asctime)s - %(levelname)s: %(name)s: %(message)s', level=logging.INFO)
         # callback_obj = gp.check_result(gp.use_python_logging())
 

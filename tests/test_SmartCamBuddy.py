@@ -1,9 +1,10 @@
 import sys
 import pytest
 from smarcambuddy import smartcambuddy
+from capture_image import CaptureImage
 
 def test_trigger_function_triggers_a_photo():
-    photoPath = smartcambuddy.trigger()
+    photoPath = CaptureImage.trigger()
     # assert photoPath exists
     # assert photoPath contains a valid photo
     # delete photoPath
