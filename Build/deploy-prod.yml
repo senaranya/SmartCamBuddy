@@ -1,0 +1,18 @@
+---
+- name: Install Smartcambuddy on Raspberry Pi
+  hosts: production
+  connection: local
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Install pre-requisites
+      apt:
+        name: ['pkg-config', 'python3.8-venv', 'gphoto2', 'libgphoto2-dev']
+        state: latest
+    - name: Create virtual env and install Python dependencies
+      pip:
+        requirements: /home/vagrant/smartcambuddy/requirements_dev.txt
+        virtualenv: /home/vagrant/.smartcambuddy_venv
+        virtualenv_command: /usr/bin/python3.8 -m venv
+
+# On Pi: git clone, make install-prod

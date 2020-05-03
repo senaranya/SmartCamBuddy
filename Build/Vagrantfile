@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.box_check_update = true
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
+    vb.name = "Vagrant - smartcambuddy_dev"
+    vb.memory = 2048
+    vb.cpus = 2
+  end
+
+  config.vm.hostname = "smartcambuddy-dev"
+  config.vm.network :private_network, ip: "192.168.33.33"
+
+  # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
+  # config.vm.define :smartcambuddy_dev do |smartcambuddy_dev|
+  # end
+
+  config.vm.synced_folder "../", "/home/vagrant/smartcambuddy"
+
+  config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y python3.8 python3.8-dev python3-pip
+     python3.8 -m pip install ansible
+     cd /home/vagrant/smartcambuddy
+     ansible-playbook -i Build/inventory.ini Build/deploy-dev.yml
+  SHELL
+end
