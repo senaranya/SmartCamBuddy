@@ -13,4 +13,4 @@ install-prod:
 	sudo python3.7 -m pip install ansible
 	sudo ansible-playbook -i Build/inventory.ini Build/deploy-prod.yml
 
-.PHONY: init test install
+.PHONY: init test install-prod

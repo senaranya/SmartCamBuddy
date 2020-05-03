@@ -14,5 +14,3 @@
         requirements: /home/pi/SmartCamBuddy/requirements.txt
         virtualenv: /home/pi/.smartcambuddy_venv
         virtualenv_command: /usr/bin/python3.7 -m venv
-
-# On Pi: git clone, make install-prod
