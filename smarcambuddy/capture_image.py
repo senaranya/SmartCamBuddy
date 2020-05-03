@@ -14,8 +14,7 @@ class CaptureImage:
 
     @staticmethod
     def trigger():
-        """This function captures an image ... """
-
+        """This function does ... """
         logging.basicConfig(format='%(asctime)s - %(levelname)s: %(name)s: %(message)s', level=logging.INFO)
         # callback_obj = gp.check_result(gp.use_python_logging())
 
