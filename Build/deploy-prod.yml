@@ -7,10 +7,32 @@
   tasks:
     - name: Install pre-requisites
       apt:
-        name: ['pkg-config', 'python3.7-venv', 'gphoto2', 'libgphoto2-dev']
+        name: ['pkg-config', 'python3.8-venv', 'gphoto2', 'libgphoto2-dev', 'supervisor']
         state: latest
     - name: Create virtual env and install Python dependencies
       pip:
         requirements: /home/pi/SmartCamBuddy/requirements.txt
         virtualenv: /home/pi/.smartcambuddy_venv
-        virtualenv_command: /usr/bin/python3.7 -m venv
+        virtualenv_command: /usr/bin/python3.8 -m venv
+    - name: Create log directory
+      file:
+        path: /home/pi/SmartCamBuddy/logs
+        state: directory
+    - name: Create logfile, if not exists
+      file:
+        path: /home/pi/SmartCamBuddy/logs/main.log
+        state: touch
+        mode: u+rw,g-wx,o-rwx
+    - name: Install supervisor config
+      copy:
+        src: /home/pi/SmartCamBuddy/Build/supervisor/smartcambuddy.conf
+        dest: /etc/supervisor/conf.d/smartcambuddy.conf
+        remote_src: yes
+    - name: Start supervisor service
+      service:
+        name: supervisor
+        state: started
+    - name: Supervisor reread
+      command: supervisorctl reread
+    - name: Supervisor update
+      command: supervisorctl update
